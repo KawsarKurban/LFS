@@ -18,12 +18,12 @@ fi
 mkdir -pv $LFS/sources
 chmod -v a+wt $LFS/sources
 mkdir -pv $LFS/tools
-mkdir -pv $LFS/{etc,var,boot,bin,lib,sbin} $LFS/usr/{bin,lib,sbin}
+mkdir -pv $LFS/{etc,var,boot} $LFS/usr/{bin,lib,sbin}
 
-chown -v lfs $LFS/{usr{,/*},lib,var,etc,bin,sbin,tools}
+chown -v lfs $LFS/{usr{,/*},var,etc,tools}
 
 for i in bin lib sbin; do
- ln -sv usr/$i $LFS/$i
+    sudo ln -sv usr/$i $LFS/$i
 done
 
 case $(uname -m) in
@@ -51,3 +51,17 @@ popd
 for p in m4 ncurses bash coreutils diffutils file findutils gawk grep gzip make patch sed tar xz binutils gcc; do
     source packageinstall.sh 6 ${p}
 done
+
+
+chmod ugo+x preparechroot.sh
+chmod ugo+x insidechroot.sh
+sudo ./preparechroot.sh "$LFS"
+echo "Entering CHROOT Environment..."
+sleep 3
+
+sudo chroot "$LFS" /usr/bin/env \
+   HOME=/root \
+   TERM="$TERM" \
+   PS1='(lfs chroot) \u:\w\$ ' \
+   PATH=/bin:/usr/bin:/sbin:/usr/sbin \
+   /bin/bash --login +h -c "/sources/insidechroot.sh"
