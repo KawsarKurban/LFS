@@ -41,6 +41,13 @@ export MAKEFLAGS='-j8'
 
 source packageinstall.sh 5 binutils
 source packageinstall.sh 5 gcc
-source packageinstall.sh 5 linux-api-headers
+source packageinstall.sh 5 linux
 source packageinstall.sh 5 glibc
 
+pushd "$LFS/gcc"
+source $LFS/sources/Chapter5/libstc.sh
+popd
+
+for p in m4 ncurses bash coreutils diffutils file findutils gawk grep gzip make patch sed tar xz binutils gcc; do
+    source packageinstall.sh 6 ${p}
+done

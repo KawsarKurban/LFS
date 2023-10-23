@@ -3,10 +3,16 @@
 CHAPTER="$1"
 PACKAGE="$2"
 
-cat md5sums | cut -d ' ' 3 | grep -i "^$PACKAGE" | grep -i -v "\.patch" | while read line; do
+cat md5sums | cut -d ' ' -f 3 | grep -i "^$PACKAGE" | grep -i -v "\.patch" | while read line; do
     FILENAME="$line"
     DIRNAME="$(echo "$PACKAGE" | sed 's/\(.*\)\.tar\..*/\1/')"
+
+    if [ -d "$DIRNAME" ]; then
+        rm -rf "$DIRNAME"
+    fi
+
     mkdir -pv $DIRNAME
+
     echo "===>Extracting $PACKAGE..."
     tar -xvf "$FILENAME" -C "$DIRNAME"
     pushd $DIRNAME
