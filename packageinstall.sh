@@ -3,12 +3,12 @@
 CHAPTER="$1"
 PACKAGE="$2"
 
-cat md5sums | grep -i "$PACKAGE" | grep -i -v "\.patch" | while read line; do
-    FILENAME="$(echo $line | cut -d ' ' -f 2)"
+cat md5sums | cut -d ' ' 3 | grep -i "^$PACKAGE" | grep -i -v "\.patch" | while read line; do
+    FILENAME="$line"
     DIRNAME="$(echo "$PACKAGE" | sed 's/\(.*\)\.tar\..*/\1/')"
     mkdir -pv $DIRNAME
     echo "===>Extracting $PACKAGE..."
-    tar -xf "$FILENAME" -C "$DIRNAME"
+    tar -xvf "$FILENAME" -C "$DIRNAME"
     pushd $DIRNAME
     if [ "$(ls -A1 | wc -l)" == "1" ]; then
         mv $(ls -A1)/* ./
