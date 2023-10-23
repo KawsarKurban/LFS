@@ -31,6 +31,7 @@ cat md5sums | cut -d ' ' -f 3 | grep -i "^$PACKAGE" | grep -i -v "\.patch" | whi
     fi
 
     echo "===>Done compiling $PACKAGE!"
+    sleep 3
     popd
 
 done

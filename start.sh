@@ -5,7 +5,7 @@
 sudo apt install binutils bison gawk gcc m4 make patch texinfo build-essential -y
 
 export LFS=/mnt/LFS
-export LFS_TGT=x86_64-kawsar-gnu-linux
+export LFS_TGT=x86_64-kawsar-linux-gnu
 export LFS_DISK=/dev/sdb
 
 if ! grep -q "$LFS" /proc/mounts; then
