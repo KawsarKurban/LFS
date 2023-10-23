@@ -17,7 +17,8 @@ https://www.youtube.com/@writeyourownoperatingsystem
 ## Run create_user script first
 <code>./create_user.sh</code>
 
-## You should be switched to lfs user shell
+You should be switched to lfs user shell
+
 ## Run env_user script
 <code>./env_user.sh</code>
 
