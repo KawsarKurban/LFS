@@ -22,6 +22,6 @@ You should be switched to lfs user shell
 ## Run env_user script
 <code>./env_user.sh</code>
 
-# Plug in your USB drive and change the drive letter in the start.sh script accordingly. In this case, USB drive is /dev/sdb
+Plug in your USB drive and change the drive letter in the start.sh script accordingly. In this case, USB drive is /dev/sdb
 ## Run start script
 <code>./start.sh</code>
