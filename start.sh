@@ -39,10 +39,10 @@ source $LFS/sources/download.sh
 #CPU Core
 export MAKEFLAGS='-j8'
 
-source packageinstall.sh 5 binutils
-source packageinstall.sh 5 gcc
-source packageinstall.sh 5 linux
-source packageinstall.sh 5 glibc
+
+for p in binutils gcc linux glibc; do
+    source packageinstall.sh 5 ${p}
+done
 
 pushd "$LFS/gcc"
 source $LFS/sources/Chapter5/libstc.sh
@@ -55,13 +55,21 @@ done
 
 chmod ugo+x preparechroot.sh
 chmod ugo+x insidechroot.sh
+chmod ugo+x insidechroot2.sh
 sudo ./preparechroot.sh "$LFS"
 echo "Entering CHROOT Environment..."
 sleep 3
 
-sudo chroot "$LFS" /usr/bin/env \
-   HOME=/root \
-   TERM="$TERM" \
-   PS1='(lfs chroot) \u:\w\$ ' \
-   PATH=/bin:/usr/bin:/sbin:/usr/sbin \
-   /bin/bash --login +h -c "/sources/insidechroot.sh"
+
+for script in "/sources/insidechroot.sh" "/sources/insidechroot2.sh"; do
+    echo "RUNNING $script IN CHROOT!"
+    sleep 3
+    sudo chroot "$LFS" /usr/bin/env \
+        HOME=/root \
+        TERM="$TERM" \
+        PS1='(lfs chroot) \u:\w\$ ' \
+        PATH=/bin:/usr/bin:/sbin:/usr/sbin \
+        TESTERUID=$UID \
+        /bin/bash --login +h -c "$script"
+done
+
