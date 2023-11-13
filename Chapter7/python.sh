@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 ./configure --prefix=/usr \
  --enable-shared \
@@ -6,4 +6,3 @@
  && make \
  && make install
 
- 

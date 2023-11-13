@@ -72,4 +72,3 @@ echo "Compiler check:"
 if printf "int main(){}" | g++ -x c++ -
 then echo "OK: g++ works";
 else echo "ERROR: g++ does NOT work"; fi
-rm -f a.out

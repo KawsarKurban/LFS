@@ -1,5 +1,3 @@
-#!/bin/bash
-
 CHAPTER="$1"
 PACKAGE="$2"
 

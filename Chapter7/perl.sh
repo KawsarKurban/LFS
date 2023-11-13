@@ -1,4 +1,3 @@
-#!/bin/bash
 
 sh Configure -des \
  -Dprefix=/usr \
@@ -12,4 +11,3 @@ sh Configure -des \
  -Dvendorarch=/usr/lib/perl5/5.38/vendor_perl \
  && make \
  && make install
- 

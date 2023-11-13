@@ -2,6 +2,9 @@
 
 ./version-check.sh
 
+[ "$?" == "1" ]; exit 1 || rm -f a.out
+
+
 sudo apt install binutils bison gawk gcc m4 make patch texinfo build-essential -y
 
 export LFS=/mnt/LFS

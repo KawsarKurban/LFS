@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo "Now Runing Inside CHROOT!"
 sleep 3
 
